@@ -1,18 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const mysql = require('mysql');
+const movieRouter = require('./routes/movie.router');
 
 const app = express();
 const PORT = process.env.PORT || 5003;
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    port: 3307,
-    user: 'root',
-    password: '',
-    database: 'crud_project1'
-})
+// const db = mysql.createConnection({
+//     host: 'localhost',
+//     port: 3307,
+//     user: 'root',
+//     password: '',
+//     database: 'crud_project1'
+// })
 
 // const db = mysql.createConnection('http://localhost/phpmyadmin')
 
@@ -25,13 +25,15 @@ const db = mysql.createConnection({
 //     }
 // })
 
-app.get('/', (req, res) => {
-    const sqlInsert = "INSERT INTO movie_reviews (movie_name, review) VALUES ('inception', 'good movie');";
+// app.get('/', (req, res) => {
+//     const sqlInsert = "INSERT INTO movie_reviews (movie_name, review) VALUES ('inception', 'good movie');";
 
-    db.query(sqlInsert, (err, result) => {
-        res.send('Hello MySQL');
-    })
-})
+//     db.query(sqlInsert, (err, result) => {
+//         res.send('Hello MySQL');
+//     })
+// })
+
+app.use('/api/v2', movieRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on PORT ${PORT}`);
