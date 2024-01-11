@@ -1,9 +1,19 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+
+async function getMovie() {
+    const response = await axios.get('//localhost:5003/api/v2/get-data')
+    return response.data;
+}
 
 export default function MovieForm() {
     const [movieName, setMovieName] = useState('');
     const [review, setReview] = useState('');
+    const [allData, setAllData] = useState(null);
+
+    useEffect(() => {
+        getMovie().then(data => setAllData(data));
+    }, [])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,6 +26,8 @@ export default function MovieForm() {
         }
 
     }
+
+    console.log(allData)
 
     return (
         <div className='p-3 max-w-lg mx-auto'>
