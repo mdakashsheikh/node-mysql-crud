@@ -9,8 +9,8 @@ export default function MovieForm() {
         e.preventDefault();
 
         try {
-            axios.post('/api/v3', {movieName, review})
-
+            const result = axios.post('/api/v2/insert', {movieName, review})
+            console.log(result)
         } catch (error) {
             console.log(error)
         }

@@ -6,6 +6,10 @@ const movieRouter = require('./routes/movie.router');
 const app = express();
 const PORT = process.env.PORT || 5003;
 
+app.use(cors())
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+
 // const db = mysql.createConnection({
 //     host: 'localhost',
 //     port: 3307,
