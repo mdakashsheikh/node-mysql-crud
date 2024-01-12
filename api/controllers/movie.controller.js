@@ -22,7 +22,23 @@ const getData = async(req, res) => {
     })
 }
 
+const editData = async(req, res) => {
+
+}
+
+const deleteData = async(req, res) => {
+    const id = req.params.id;
+    const sqlDelete = "DELETE FROM movie_reviews WHERE ID = ?";
+
+    db.query(sqlDelete, [id], (err, result) => {
+        if(err) return res.json({Message: "Server Error"});
+        return res.json(result);
+    })
+}
+
 module.exports = {
     inserData,
     getData,
+    editData,
+    deleteData,
 }
