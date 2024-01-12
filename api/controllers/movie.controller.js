@@ -23,7 +23,16 @@ const getData = async(req, res) => {
 }
 
 const editData = async(req, res) => {
+    const id = req.params.id;
+    const movieName = req.body.movieName;
+    const review = req.body.review;
 
+    const sqlUpdate = "UPDATE movie_reviews SET `movie_name`=?,  `review`=? WHERE ID=?";
+
+    db.query(sqlUpdate, [movieName, review, id], (err, result) => {
+        if(err) return res.json({Message: 'Server Error'});
+        return res.json(result);
+    })
 }
 
 const deleteData = async(req, res) => {
